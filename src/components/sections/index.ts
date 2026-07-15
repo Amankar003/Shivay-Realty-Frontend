@@ -1,0 +1,15 @@
+export { Hero } from "./hero";
+export { HeroSearch } from "./hero-search";
+export { HeroStats } from "./hero-stats";
+export { FeaturedProjects } from "./featured-projects";
+export { WhyChooseUs } from "./why-choose-us";
+export { Statistics } from "./statistics";
+export { Testimonials } from "./testimonials";
+export { CTASection } from "./cta-section";
+export { AboutHero } from "./about-hero";
+export { VisionMission } from "./vision-mission";
+export { Founder } from "./founder";
+export { ProjectsList } from "./projects-list";
+export { ContactInfo } from "./contact-info";
+export { ContactForm } from "./contact-form";
+export { HowWeWork } from "./how-we-work";
