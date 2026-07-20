@@ -3,23 +3,37 @@
 import { useState } from "react";
 import { Send } from "lucide-react";
 import { ScrollReveal, GlassCard } from "@/components/shared";
+import { inquiryService } from "@/services/inquiry-service";
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError("");
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const formData = new FormData(e.currentTarget);
+    const data = {
+        name: `${formData.get('firstName')} ${formData.get('lastName')}`,
+        email: formData.get('email') as string,
+        phone: formData.get('phone') as string,
+        subject: formData.get('subject') as string,
+        message: formData.get('message') as string,
+    };
     
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    
-    setTimeout(() => setIsSuccess(false), 5000);
-    (e.target as HTMLFormElement).reset();
+    try {
+        await inquiryService.submitContact(data);
+        setIsSuccess(true);
+        setTimeout(() => setIsSuccess(false), 5000);
+        (e.target as HTMLFormElement).reset();
+    } catch (err: any) {
+        setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+        setIsSubmitting(false);
+    }
   };
 
   return (
@@ -35,6 +49,11 @@ export function ContactForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg text-sm text-center">
+              {error}
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="firstName" className="block text-xs font-accent tracking-wider text-foreground-muted uppercase mb-2">
@@ -42,6 +61,7 @@ export function ContactForm() {
               </label>
               <input
                 id="firstName"
+                name="firstName"
                 type="text"
                 required
                 className="w-full bg-background border border-border rounded-lg py-3 px-4 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors"
@@ -54,6 +74,7 @@ export function ContactForm() {
               </label>
               <input
                 id="lastName"
+                name="lastName"
                 type="text"
                 required
                 className="w-full bg-background border border-border rounded-lg py-3 px-4 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors"
@@ -69,6 +90,7 @@ export function ContactForm() {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 required
                 className="w-full bg-background border border-border rounded-lg py-3 px-4 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors"
@@ -81,6 +103,7 @@ export function ContactForm() {
               </label>
               <input
                 id="phone"
+                name="phone"
                 type="tel"
                 required
                 className="w-full bg-background border border-border rounded-lg py-3 px-4 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors"
@@ -95,6 +118,7 @@ export function ContactForm() {
             </label>
             <select
               id="subject"
+              name="subject"
               required
               className="w-full bg-background border border-border rounded-lg py-3 px-4 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors appearance-none"
             >
@@ -112,6 +136,7 @@ export function ContactForm() {
             </label>
             <textarea
               id="message"
+              name="message"
               required
               rows={5}
               className="w-full bg-background border border-border rounded-lg py-3 px-4 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors resize-none"
@@ -128,7 +153,7 @@ export function ContactForm() {
               {isSubmitting ? "Sending Message..." : "Send Message"}
               {!isSubmitting && <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />}
             </span>
-            <div className="absolute inset-0 z-0 bg-white/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
+            <div className="absolute inset-0 z-0 bg-foreground/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
           </button>
 
           {isSuccess && (

@@ -9,7 +9,7 @@ export function HeroSearch() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 0.8 }}
-      className="w-full max-w-6xl mx-auto bg-white rounded-[24px] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-[#ECECEC] p-6 lg:p-8 relative z-30"
+      className="w-full max-w-6xl mx-auto glass-heavy rounded-[24px] p-6 lg:p-8 relative z-30"
     >
       <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8 items-end">
         {/* Location */}
@@ -72,7 +72,7 @@ export function HeroSearch() {
         <div className="flex flex-col justify-end pt-2 md:pt-0">
           <button
             type="button"
-            className="h-[52px] w-full bg-black hover:bg-black/80 text-white rounded-[16px] flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+            className="h-[52px] w-full bg-foreground hover:bg-foreground/90 text-background rounded-[16px] flex items-center justify-center gap-3 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
           >
             <Search className="h-5 w-5" />
             <span className="font-accent text-sm font-medium tracking-wider uppercase lg:hidden">Search</span>

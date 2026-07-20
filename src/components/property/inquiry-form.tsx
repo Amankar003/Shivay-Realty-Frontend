@@ -99,7 +99,7 @@ export function InquiryForm({ propertyName }: InquiryFormProps) {
             {isSubmitting ? "Sending..." : "Request Details"}
             {!isSubmitting && <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />}
           </span>
-          <div className="absolute inset-0 z-0 bg-white/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
+          <div className="absolute inset-0 z-0 bg-foreground/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
         </button>
 
         {isSuccess && (

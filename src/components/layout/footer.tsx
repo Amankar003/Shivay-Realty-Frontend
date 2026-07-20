@@ -16,7 +16,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative mt-auto overflow-hidden bg-background pt-20 pb-10">
+    <footer className="dark relative mt-auto overflow-hidden bg-background text-foreground pt-20 pb-10 transition-colors duration-500">
       {/* Decorative top border */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-gold/20 to-transparent" />
       
@@ -115,7 +115,7 @@ export function Footer() {
                   <MapPin className="h-5 w-5 text-accent-gold shrink-0 mt-0.5" />
                   <span>
                     {SITE_CONFIG.address.line1}<br />
-                    {SITE_CONFIG.address.line2}<br />
+                    {SITE_CONFIG.address.line2 && <>{SITE_CONFIG.address.line2}<br /></>}
                     {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.pincode}
                   </span>
                 </li>

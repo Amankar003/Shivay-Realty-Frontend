@@ -13,7 +13,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [isMounted, setIsMounted] = useState(false);
   
-  const { isScrolled, isMobileMenuOpen, toggleMobileMenu, setMobileMenuOpen } = useUIStore();
+  const { isScrolled, isMobileMenuOpen, toggleMobileMenu, setMobileMenuOpen, hasPlayedHeroAnimation } = useUIStore();
 
   useEffect(() => {
     setIsMounted(true);
@@ -28,10 +28,14 @@ export function Navbar() {
 
   return (
     <>
-      <header
+      <motion.header
+        initial={pathname === "/" && !hasPlayedHeroAnimation ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: pathname === "/" && !hasPlayedHeroAnimation ? 0.2 : 0, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled ? "glass-heavy py-4" : "bg-transparent py-6"
+          isScrolled ? "glass-heavy py-4" : "glass py-6 border-transparent",
+          isMobileMenuOpen && !isScrolled ? "glass-heavy border-b border-border/10" : ""
         )}
       >
         <div className="container-luxury flex items-center justify-between">
@@ -86,7 +90,7 @@ export function Navbar() {
 
             <button
               onClick={toggleMobileMenu}
-              className="relative z-50 flex h-10 w-10 items-center justify-center rounded-full bg-background/20 backdrop-blur-md transition-colors hover:bg-accent-gold/20 md:hidden"
+              className="relative z-50 flex h-10 w-10 items-center justify-center rounded-full glass-heavy transition-colors hover:bg-accent-gold/20 md:hidden"
               aria-label="Toggle Menu"
             >
               {isMobileMenuOpen ? (
@@ -97,7 +101,7 @@ export function Navbar() {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
@@ -107,7 +111,7 @@ export function Navbar() {
             animate={{ opacity: 1, clipPath: "circle(150% at top right)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at top right)" }}
             transition={{ duration: 0.5, ease: [0.7, 0, 0.3, 1] }}
-            className="fixed inset-0 z-40 flex flex-col bg-background-secondary pt-24 pb-8 px-6 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col glass-heavy pt-24 pb-8 px-6 md:hidden"
           >
             <div className="flex flex-col gap-6">
               {NAV_LINKS.map((link, i) => {

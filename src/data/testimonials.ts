@@ -13,42 +13,32 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    name: "Arjun & Meera Khanna",
-    designation: "Business Owner",
+    name: "Margarita Perez",
+    designation: "Customer",
     testimonial:
-      "Moving into our Shivaay Realty penthouse was the best decision we ever made. The attention to detail in every corner, from the Italian marble foyer to the panoramic terrace — it feels like living in a five-star hotel, every single day.",
+      "I am very impressed with the service provided. The apartment location is excellent and highly convenient.",
     rating: 5,
-    location: "Mumbai",
-    project: "Shivaay Grandeur",
+    location: "Ranchi",
+    project: "Premium 3BHK Guest House",
   },
   {
     id: "t2",
-    name: "Priya Sharma",
-    designation: "Senior Director, Tech",
+    name: "Claudia Alves",
+    designation: "Customer",
     testimonial:
-      "As an NRI, I was nervous about investing remotely. Shivaay Realty's transparent process, regular video updates, and impeccable handover made the entire journey seamless. My 3 BHK in Bangalore has already appreciated 28% in two years.",
+      "I rented an apartment through Shivaay Realty and I am extremely satisfied with my overall experience.",
     rating: 5,
-    location: "San Francisco / Bangalore",
-    project: "Shivaay Heights",
+    location: "Ranchi",
+    project: "Modern 3BHK Guest House",
   },
   {
     id: "t3",
-    name: "Rajesh & Sunita Gupta",
-    designation: "Real Estate Investor",
+    name: "Yanis Petros",
+    designation: "Customer",
     testimonial:
-      "In 25 years of real estate investing, I've rarely seen construction quality this exceptional. Shivaay Realty delivers what they promise — on time, with zero compromises. We've already booked our second property with them.",
+      "The rental process was smooth, professional, and completed much faster than expected.",
     rating: 5,
-    location: "Delhi",
-    project: "Shivaay Residences",
-  },
-  {
-    id: "t4",
-    name: "Dr. Ananya Iyer",
-    designation: "Chief of Surgery",
-    testimonial:
-      "The amenities at Shivaay Elysium are unmatched — the infinity pool, the landscaped gardens, the private cinema. But what truly sets them apart is the community they've built. It's luxury living with a soul.",
-    rating: 5,
-    location: "Hyderabad",
-    project: "Shivaay Elysium",
+    location: "Ranchi",
+    project: "Luxury 5BHK Residence",
   },
 ];

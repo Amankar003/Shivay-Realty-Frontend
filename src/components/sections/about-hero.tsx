@@ -13,17 +13,17 @@ export function AboutHero() {
             <ScrollReveal direction="up" duration={0.6}>
               <span className="overline text-accent-gold mb-6 block">Our Story</span>
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium text-foreground leading-[1.1] tracking-tight mb-8">
-                Crafting Legacies in <br />
-                <span className="text-gradient-gold italic pr-2">Real Estate</span>
+                About <br />
+                <span className="text-gradient-gold italic pr-2">Shivaay Realty</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2} duration={0.6}>
               <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed mb-8 max-w-lg">
-                Since our inception, {SITE_CONFIG.name} has been driven by a singular vision: to redefine how clients discover and acquire luxury real estate by merging unbiased advisory with unparalleled service.
+                Shivaay Realty specializes in premium residential rental solutions in Ranchi. We provide carefully selected apartments, guest houses, luxury residences, and family homes located in prime neighborhoods.
               </p>
               <p className="text-base text-foreground-muted leading-relaxed max-w-lg">
-                Every client we serve is more than just a transaction; it is a meticulously nurtured relationship designed to stand the test of time and provide an unmatched buying experience for our discerning clientele.
+                Whether you're a working professional, a family, or searching for long-term accommodation, we help you find comfortable, secure, and modern rental homes that suit your lifestyle and budget.
               </p>
             </ScrollReveal>
           </div>
@@ -33,7 +33,7 @@ export function AboutHero() {
             <ScrollReveal direction="left" delay={0.3} className="absolute top-0 right-0 w-3/4 h-[70%] z-10">
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                  src="/images/photo-1600596542815-ffad4c1539a9.jpg"
                   alt="Luxury Architecture"
                   fill
                   className="object-cover"
@@ -47,7 +47,7 @@ export function AboutHero() {
             <ScrollReveal direction="up" delay={0.5} className="absolute bottom-0 left-0 w-2/3 h-[50%] z-20">
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="/images/photo-1600607687920-4e2a09cf159d.jpg"
                   alt="Luxury Interior"
                   fill
                   className="object-cover"

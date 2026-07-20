@@ -4,18 +4,18 @@ export const SITE_CONFIG = {
   name: "Shivaay Realty",
   tagline: "Your Trusted Real Estate Partner",
   description:
-    "Shivaay Realty is a premium real estate brokerage and consultancy, connecting buyers with trusted developers and guiding you to your perfect home or investment.",
+    "Shivaay Realty specializes in premium residential rental solutions in Ranchi. We provide carefully selected apartments, guest houses, luxury residences, and family homes located in prime neighborhoods.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://shivaayrealty.com",
   apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1",
   email: "info@shivaayrealty.com",
-  phone: "+91 98765 43210",
-  alternatePhone: "+91 98765 43211",
+  phone: "+91 6206825676",
+  alternatePhone: "",
   address: {
-    line1: "Shivaay Tower, 15th Floor",
-    line2: "Bandra Kurla Complex",
-    city: "Mumbai",
-    state: "Maharashtra",
-    pincode: "400051",
+    line1: "Ranchi",
+    line2: "",
+    city: "Ranchi",
+    state: "Jharkhand",
+    pincode: "",
     country: "India",
   },
   socialLinks: {
@@ -25,7 +25,7 @@ export const SITE_CONFIG = {
     twitter: "https://x.com/shivaayrealty",
     youtube: "https://youtube.com/@shivaayrealty",
   },
-  workingHours: "Mon – Sat: 10:00 AM – 7:00 PM",
+  workingHours: "24/7 Customer Support",
   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || "",
 } as const;
 
@@ -47,66 +47,56 @@ export const FOOTER_LINKS = {
     { label: "Terms & Conditions", href: "/terms" },
   ],
   support: [
-    { label: "Book a Site Visit", href: "/contact#site-visit" },
-    { label: "Customer Support", href: "/contact" },
+    { label: "Apartment Rentals", href: "/projects" },
+    { label: "Luxury Apartments", href: "/projects" },
+    { label: "Guest Houses", href: "/projects" },
+    { label: "Family Residences", href: "/projects" },
   ],
 } as const;
 
 export const PROPERTY_TYPES = [
-  { label: "Apartment", value: "apartment" },
-  { label: "Villa", value: "villa" },
+  { label: "Luxury Apartment", value: "luxury-apartment" },
+  { label: "Guest House", value: "guest-house" },
+  { label: "Luxury Residence", value: "luxury-residence" },
   { label: "Penthouse", value: "penthouse" },
-  { label: "Commercial", value: "commercial" },
-  { label: "Plot", value: "plot" },
-  { label: "Townhouse", value: "townhouse" },
+  { label: "Duplex Apartment", value: "duplex-apartment" },
 ] as const;
 
 export const PROPERTY_STATUSES = [
-  { label: "New Launch", value: "upcoming" },
-  { label: "Under Construction", value: "under-construction" },
-  { label: "Ready to Move", value: "ready-to-move" },
+  { label: "Available", value: "available" },
+  { label: "Rented", value: "rented" },
 ] as const;
 
 export const PRICE_RANGES = [
-  { label: "Under ₹1 Cr", min: 0, max: 100 },
-  { label: "₹1 Cr – ₹3 Cr", min: 100, max: 300 },
-  { label: "₹3 Cr – ₹5 Cr", min: 300, max: 500 },
-  { label: "₹5 Cr – ₹10 Cr", min: 500, max: 1000 },
-  { label: "₹10 Cr+", min: 1000, max: Infinity },
+  { label: "Under ₹10,000", min: 0, max: 10000 },
+  { label: "₹10,000 – ₹20,000", min: 10000, max: 20000 },
+  { label: "₹20,000 – ₹50,000", min: 20000, max: 50000 },
+  { label: "₹50,000+", min: 50000, max: Infinity },
 ] as const;
 
 export const SORT_OPTIONS = [
   { label: "Newest First", value: "newest" },
-  { label: "Price: Low to High", value: "price-asc" },
-  { label: "Price: High to Low", value: "price-desc" },
+  { label: "Rent: Low to High", value: "price-asc" },
+  { label: "Rent: High to Low", value: "price-desc" },
   { label: "Name: A–Z", value: "name-asc" },
 ] as const;
 
 export const CITIES = [
-  "Mumbai",
-  "Delhi",
-  "Bangalore",
-  "Hyderabad",
-  "Pune",
-  "Chennai",
-  "Goa",
+  "Ranchi",
 ] as const;
 
 export const BEDROOM_OPTIONS = [1, 2, 3, 4, 5] as const;
 
 export const METADATA_DEFAULTS = {
-  title: "Shivaay Realty — Premium Real Estate Brokerage",
+  title: "Shivaay Realty — Premium Residential Rentals in Ranchi",
   description:
-    "Find the right property with Shivaay Realty. We offer expert property consultation, connecting you with trusted developers for luxury apartments, villas, and commercial spaces.",
+    "Shivaay Realty specializes in premium residential rental solutions in Ranchi. We provide carefully selected apartments, guest houses, luxury residences, and family homes located in prime neighborhoods.",
   keywords: [
-    "luxury real estate broker",
-    "property consultancy",
-    "premium apartments",
-    "buy luxury villas",
+    "luxury apartment rentals Ranchi",
+    "guest houses Ranchi",
+    "premium residences",
     "Shivaay Realty",
-    "trusted property advisors",
-    "real estate investment India",
-    "premium properties",
+    "rent an apartment in Ranchi",
   ],
   openGraph: {
     type: "website",

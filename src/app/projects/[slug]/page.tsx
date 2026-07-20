@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getPropertyBySlug } from "@/data/properties";
+import { propertyService } from "@/services/property-service";
 import { PropertyHero, PropertyAmenities, InquiryForm } from "@/components/property";
 import { SITE_CONFIG } from "@/data/navigation";
 
@@ -9,7 +9,7 @@ export async function generateMetadata(
   props: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const params = await props.params;
-  const property = getPropertyBySlug(params.slug);
+  const property = await propertyService.getPropertyBySlug(params.slug);
 
   if (!property) {
     return {
@@ -23,14 +23,14 @@ export async function generateMetadata(
     openGraph: {
       title: `${property.title} by ${SITE_CONFIG.name}`,
       description: property.description.substring(0, 160),
-      images: property.images.length > 0 ? [{ url: property.images[0].url }] : [],
+      images: property.images && property.images.length > 0 ? [{ url: property.images[0].url }] : [],
     },
   };
 }
 
 export default async function PropertyDetailsPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
-  const property = getPropertyBySlug(params.slug);
+  const property = await propertyService.getPropertyBySlug(params.slug);
 
   if (!property) {
     notFound();

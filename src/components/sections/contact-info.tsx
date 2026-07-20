@@ -6,11 +6,11 @@ export function ContactInfo() {
   const contactDetails = [
     {
       icon: MapPin,
-      title: "Corporate Headquarters",
+      title: "Location",
       details: [
-        "Shivaay Tower, 45th Floor",
-        "Bandra Kurla Complex",
-        "Mumbai, Maharashtra 400051",
+        "Shivaay Realty",
+        "Ranchi, Jharkhand",
+        "India",
       ],
     },
     {
@@ -18,26 +18,23 @@ export function ContactInfo() {
       title: "Contact Numbers",
       details: [
         `Sales: ${SITE_CONFIG.phone}`,
-        "Corporate: +91 22 6789 0123",
-        "Toll-Free: 1800 123 4567",
+        "Support: +91 6206825676",
       ],
     },
     {
       icon: Mail,
       title: "Email Addresses",
       details: [
-        `Sales: ${SITE_CONFIG.email}`,
+        `General: ${SITE_CONFIG.email}`,
         "Support: support@shivaayrealty.com",
-        "Press: media@shivaayrealty.com",
       ],
     },
     {
       icon: Clock,
-      title: "Operating Hours",
+      title: "Customer Support",
       details: [
-        "Monday - Friday: 9:00 AM - 7:00 PM",
-        "Saturday: 10:00 AM - 4:00 PM",
-        "Sunday: Closed (Available by appointment)",
+        "24/7 Support Available",
+        "Property Visits by Appointment",
       ],
     },
   ];
@@ -46,10 +43,10 @@ export function ContactInfo() {
     <div className="flex flex-col gap-8">
       <ScrollReveal direction="up" duration={0.6}>
         <h2 className="font-display text-4xl font-medium text-foreground mb-6">
-          Get in Touch
+          Contact Shivaay Realty
         </h2>
         <p className="text-foreground-secondary text-lg leading-relaxed mb-8">
-          Whether you are looking for your next luxury residence or exploring partnership opportunities, our dedicated team is here to assist you with the highest level of service.
+          Our property experts are always ready to help you find the perfect rental home. Call us today to schedule a visit or learn more about our available residential properties.
         </p>
       </ScrollReveal>
 

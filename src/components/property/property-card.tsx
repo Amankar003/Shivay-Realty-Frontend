@@ -21,13 +21,13 @@ export function PropertyCard({ property, className, priority = false }: Property
 
   return (
     <Link href={`/projects/${property.slug}`} className={cn("group block w-full", className)}>
-      <div className="glass flex flex-col h-full overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-gold hover:border-accent-gold/40">
+      <div className="glass flex flex-col h-full overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-gold hover:border-accent-gold/40 active:scale-[0.98]">
         
         {/* Image Container */}
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           <Image
-            src={property.image?.url || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"}
-            alt={property.image?.altText || property.title}
+            src={property.images && property.images.length > 0 ? property.images[0].url : (property.image?.url || "/images/photo-1600596542815-ffad4c1539a9.jpg")}
+            alt={property.images && property.images.length > 0 ? (property.images[0].alt_text || property.title) : (property.image?.altText || property.title)}
             fill
             priority={priority}
             className="object-cover transition-transform duration-700 group-hover:scale-105"

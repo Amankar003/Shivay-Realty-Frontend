@@ -6,6 +6,7 @@ export interface Statistic {
   suffix: string;
   label: string;
   icon: string; // Lucide icon name
+  description?: string;
 }
 
 export const statistics: Statistic[] = [
@@ -15,6 +16,7 @@ export const statistics: Statistic[] = [
     suffix: "+",
     label: "Developer Partners",
     icon: "Building2",
+    description: "Partnering with India's most prestigious tier-1 luxury real estate developers to bring you exclusive inventory before the market.",
   },
   {
     id: "s2",

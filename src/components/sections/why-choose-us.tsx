@@ -4,34 +4,34 @@ import { SectionHeader, ScrollReveal, GlassCard } from "@/components/shared";
 export function WhyChooseUs() {
   const usps = [
     {
-      icon: Diamond,
-      title: "Market Expertise",
-      description: "Our deep understanding of the luxury real estate market ensures you get the best property at the right price.",
-    },
-    {
       icon: Map,
       title: "Prime Locations",
-      description: "We curate properties in the most coveted neighborhoods, offering unmatched connectivity and prestige.",
-    },
-    {
-      icon: Award,
-      title: "Trusted Developer Network",
-      description: "We partner exclusively with globally renowned and reliable builders with proven track records.",
+      description: "We curate properties in the most coveted neighborhoods across Ranchi, offering unmatched connectivity.",
     },
     {
       icon: Clock,
-      title: "End-to-End Assistance",
-      description: "From property discovery and site visits to documentation and home loans, we guide you every step of the way.",
+      title: "Flexible Rental Plans",
+      description: "Customized rental agreements designed to suit your schedule, whether short-term or long-term.",
+    },
+    {
+      icon: Diamond,
+      title: "Luxury Apartments",
+      description: "High-quality, modern, and comfortable residences for a premium lifestyle.",
+    },
+    {
+      icon: Award,
+      title: "Competitive Prices",
+      description: "Transparent pricing with zero hidden costs to ensure you get the best value for your rent.",
     },
     {
       icon: Shield,
-      title: "Complete Transparency",
-      description: "Clear communication, unbiased advice, and a zero-hidden-costs policy for complete peace of mind.",
+      title: "24/7 Customer Support",
+      description: "Our dedicated support team is always available to address your maintenance and rental queries.",
     },
     {
       icon: Users,
-      title: "Personalized Advisory",
-      description: "We understand that every buyer is unique, offering tailored property recommendations matching your lifestyle.",
+      title: "Professional Assistance",
+      description: "Expert guidance from property discovery to easy rental agreement signing.",
     },
   ];
 

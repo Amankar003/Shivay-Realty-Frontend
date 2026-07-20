@@ -93,7 +93,7 @@ export function PropertyHero({ property }: PropertyHeroProps) {
                   />
                   {idx === 2 && property.images.length > 3 && (
                     <div className="absolute inset-0 bg-background/60 backdrop-blur-sm flex items-center justify-center">
-                      <span className="text-white font-display text-xl">+{property.images.length - 3}</span>
+                      <span className="text-foreground font-display text-xl">+{property.images.length - 3}</span>
                     </div>
                   )}
                 </div>

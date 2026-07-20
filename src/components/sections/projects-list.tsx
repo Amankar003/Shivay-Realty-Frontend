@@ -1,12 +1,15 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { PropertyCard, PropertyFilters } from "@/components/property";
 import { SectionHeader, ScrollReveal } from "@/components/shared";
-import { featuredProperties } from "@/data/properties";
-import type { PropertyType, PropertyStatus } from "@/types";
+import { propertyService } from "@/services/property-service";
+import type { PropertyType, PropertyStatus, Property } from "@/types";
 
 export function ProjectsList() {
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  
   const [filters, setFilters] = useState({
     type: "all" as PropertyType | "all",
     status: "all" as PropertyStatus | "all",
@@ -14,15 +17,29 @@ export function ProjectsList() {
     search: "",
   });
 
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const data = await propertyService.getProperties();
+        setProperties(data.items);
+      } catch (error) {
+        console.error("Failed to load properties", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProperties();
+  }, []);
+
   // Extract unique cities
   const cities = useMemo(() => {
-    const uniqueCities = new Set(featuredProperties.map(p => p.city));
+    const uniqueCities = new Set(properties.map(p => p.city));
     return Array.from(uniqueCities).sort();
-  }, []);
+  }, [properties]);
 
   // Filter properties
   const filteredProperties = useMemo(() => {
-    return featuredProperties.filter((property) => {
+    return properties.filter((property) => {
       // Search filter
       const searchLower = filters.search.toLowerCase();
       const matchesSearch = !filters.search || 
@@ -41,7 +58,7 @@ export function ProjectsList() {
 
       return matchesSearch && matchesType && matchesStatus && matchesCity;
     });
-  }, [filters]);
+  }, [filters, properties]);
 
   return (
     <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 min-h-screen bg-background">
@@ -63,7 +80,11 @@ export function ProjectsList() {
         </div>
 
         {/* Grid */}
-        {filteredProperties.length > 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-32">
+            <div className="w-10 h-10 border-4 border-accent-gold border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : filteredProperties.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProperties.map((property, index) => (
               <ScrollReveal
@@ -72,7 +93,7 @@ export function ProjectsList() {
                 delay={(index % 3) * 0.1}
                 duration={0.6}
               >
-                <PropertyCard property={property} priority={index < 3} />
+                <PropertyCard property={property as any} priority={index < 3} />
               </ScrollReveal>
             ))}
           </div>

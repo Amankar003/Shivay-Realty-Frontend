@@ -5,10 +5,10 @@ import { Building2, ShieldCheck, Users, Award } from "lucide-react";
 
 export function HeroStats() {
   const stats = [
-    { value: "200+", label: "Properties", icon: <Building2 className="h-6 w-6" /> },
-    { value: "50+", label: "Trusted Builders", icon: <ShieldCheck className="h-6 w-6" /> },
-    { value: "1500+", label: "Happy Clients", icon: <Users className="h-6 w-6" /> },
-    { value: "10+", label: "Years Experience", icon: <Award className="h-6 w-6" /> },
+    { value: "500+", label: "Properties", icon: <Building2 className="h-6 w-6" /> },
+    { value: "1-4", label: "BHK Range", icon: <ShieldCheck className="h-6 w-6" /> },
+    { value: "₹8k+", label: "Starting Rent", icon: <Award className="h-6 w-6" /> },
+    { value: "24/7", label: "Support", icon: <Users className="h-6 w-6" /> },
   ];
 
   return (
@@ -16,9 +16,9 @@ export function HeroStats() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.8, duration: 0.8 }}
-      className="w-full max-w-6xl mx-auto bg-white rounded-[24px] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-[#ECECEC] p-6 lg:p-10 relative z-30"
+      className="w-full max-w-6xl mx-auto glass-heavy rounded-[24px] p-6 lg:p-10 relative z-30"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 divide-y sm:divide-y-0 lg:divide-x divide-[#ECECEC]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 divide-y sm:divide-y-0 lg:divide-x divide-border">
         {stats.map((stat, index) => (
           <motion.div 
             key={index}

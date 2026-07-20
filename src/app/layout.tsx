@@ -3,6 +3,7 @@ import { fontVariables } from "@/lib/fonts";
 import { SITE_CONFIG, METADATA_DEFAULTS } from "@/lib/constants";
 import { Providers } from "./providers";
 import { Navbar, Footer, PageWrapper } from "@/components/layout";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -67,6 +68,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <CustomCursor />
         <Providers>
           <Navbar />
           <PageWrapper>

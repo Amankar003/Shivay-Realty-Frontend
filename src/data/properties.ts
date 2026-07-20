@@ -18,7 +18,7 @@ export const featuredProperties: PropertyCardData[] = [
     isFeatured: true,
     image: {
       id: "img-1",
-      url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      url: "/images/photo-1600596542815-ffad4c1539a9.jpg",
       publicId: "placeholder",
       altText: "Shivaay Grandeur Exterior",
       order: 1,
@@ -42,7 +42,7 @@ export const featuredProperties: PropertyCardData[] = [
     isFeatured: true,
     image: {
       id: "img-2",
-      url: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      url: "/images/photo-1600607687920-4e2a09cf159d.jpg",
       publicId: "placeholder",
       altText: "Shivaay Elysium Penthouse",
       order: 1,
@@ -66,7 +66,7 @@ export const featuredProperties: PropertyCardData[] = [
     isFeatured: true,
     image: {
       id: "img-3",
-      url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      url: "/images/photo-1600585154340-be6161a56a0c.jpg",
       publicId: "placeholder",
       altText: "Shivaay Heights Building",
       order: 1,
@@ -90,7 +90,7 @@ export const featuredProperties: PropertyCardData[] = [
     isFeatured: false,
     image: {
       id: "img-4",
-      url: "https://images.unsplash.com/photo-1613490908592-fd5e48f76b4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      url: "/images/photo-1613490908592-fd5e48f76b4a.jpg",
       publicId: "placeholder",
       altText: "Shivaay Villas Goa",
       order: 1,
@@ -114,7 +114,7 @@ export const featuredProperties: PropertyCardData[] = [
     isFeatured: false,
     image: {
       id: "img-5",
-      url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      url: "/images/photo-1486406146926-c627a92ad1ab.jpg",
       publicId: "placeholder",
       altText: "Shivaay Corporate Tower",
       order: 1,
@@ -138,7 +138,7 @@ export const featuredProperties: PropertyCardData[] = [
     isFeatured: false,
     image: {
       id: "img-6",
-      url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      url: "/images/photo-1545324418-cc1a3fa10c00.jpg",
       publicId: "placeholder",
       altText: "Shivaay Reserve Pune",
       order: 1,
@@ -180,7 +180,7 @@ export function getPropertyBySlug(slug: string): Property | null {
     floorPlans: [
       {
         name: `${cardData.bedrooms} BHK Luxury`,
-        imageUrl: "https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        imageUrl: "/images/photo-1600607686527-6fb886090705.jpg",
         area: `${cardData.areaSqft} Sq.Ft.`,
         bedrooms: cardData.bedrooms,
         bathrooms: cardData.bathrooms,
@@ -196,7 +196,7 @@ export function getPropertyBySlug(slug: string): Property | null {
       cardData.image,
       {
         id: "img-detail-1",
-        url: "https://images.unsplash.com/photo-1600566753086-00f18efc2291?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+        url: "/images/photo-1600566753086-00f18efc2291.jpg",
         publicId: "placeholder",
         altText: `${cardData.title} Interior`,
         order: 2,
@@ -204,7 +204,7 @@ export function getPropertyBySlug(slug: string): Property | null {
       },
       {
         id: "img-detail-2",
-        url: "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+        url: "/images/photo-1600573472550-8090b5e0745e.jpg",
         publicId: "placeholder",
         altText: `${cardData.title} View`,
         order: 3,
