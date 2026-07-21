@@ -26,8 +26,8 @@ export function PropertyCard({ property, className, priority = false }: Property
         {/* Image Container */}
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           <Image
-            src={property.images && property.images.length > 0 ? property.images[0].url : (property.image?.url || "/images/photo-1600596542815-ffad4c1539a9.jpg")}
-            alt={property.images && property.images.length > 0 ? (property.images[0].alt_text || property.title) : (property.image?.altText || property.title)}
+            src={property.image?.url || "/images/photo-1600596542815-ffad4c1539a9.jpg"}
+            alt={property.image?.altText || property.title}
             fill
             priority={priority}
             className="object-cover transition-transform duration-700 group-hover:scale-105"

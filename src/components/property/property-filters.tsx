@@ -45,19 +45,32 @@ export function PropertyFilters({ onFilterChange, cities }: PropertyFiltersProps
         
         {/* Top Bar: Search & Mobile Toggle */}
         <div className="flex flex-col md:flex-row gap-4 mb-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground-muted" />
-            <input
-              type="text"
-              placeholder="Search by project name or location..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                // Auto-apply search for better UX
-                onFilterChange({ type, status, city, search: e.target.value });
-              }}
-              className="w-full bg-background border border-border rounded-xl py-3 pl-12 pr-4 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors placeholder:text-foreground-muted/70"
-            />
+          <div className="flex-1">
+            <div className="relative w-full">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground-muted" />
+              <input
+                type="text"
+                placeholder="Search by project name or location..."
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  // Auto-apply search for better UX
+                  onFilterChange({ type, status, city, search: e.target.value });
+                }}
+                className="w-full bg-background border border-border rounded-xl py-3 pl-12 pr-28 text-sm text-foreground focus:outline-none focus:border-accent-gold transition-colors placeholder:text-foreground-muted/70"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    onFilterChange({ type, status, city, search });
+                  }
+                }}
+              />
+              <button
+                onClick={() => onFilterChange({ type, status, city, search })}
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-accent-gold text-background text-xs font-accent tracking-wide uppercase font-bold px-4 py-2 rounded-lg hover:shadow-gold transition-all"
+              >
+                Search
+              </button>
+            </div>
           </div>
           
           <button

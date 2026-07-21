@@ -4,10 +4,10 @@ import { useState, useMemo, useEffect } from "react";
 import { PropertyCard, PropertyFilters } from "@/components/property";
 import { SectionHeader, ScrollReveal } from "@/components/shared";
 import { propertyService } from "@/services/property-service";
-import type { PropertyType, PropertyStatus, Property } from "@/types";
+import type { PropertyType, PropertyStatus, PropertyCardData } from "@/types";
 
 export function ProjectsList() {
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [properties, setProperties] = useState<PropertyCardData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
   const [filters, setFilters] = useState({

@@ -85,7 +85,7 @@ export function Statistics() {
                   }`}>
                     <Counter 
                       from={0} 
-                      to={typeof stat.value === 'string' ? parseInt(stat.value.replace(/,/g, ''), 10) : stat.value} 
+                      to={stat.value} 
                       isInView={isInView}
                       delay={index * 0.15}
                     />

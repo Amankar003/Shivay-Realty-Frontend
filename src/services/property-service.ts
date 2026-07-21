@@ -29,7 +29,7 @@ export const propertyService = {
   /**
    * Get paginated list of properties with filters
    */
-  async getProperties(filters?: PropertyFilters) {
+  async getProperties(filters?: PropertyFilters): Promise<PaginatedResponse<PropertyCardData>> {
     const response = await api.get<any>("/properties", {
       search: filters?.search,
       city: filters?.city,
@@ -46,8 +46,17 @@ export const propertyService = {
     // Map items if response is paginated (it's a dict with items)
     if (response && Array.isArray(response.items)) {
       response.items = response.items.map(mapPropertyResponse);
-    } else if (Array.isArray(response)) {
-        return { items: response.map(mapPropertyResponse), total: response.length, page: 1, limit: response.length, totalPages: 1 };
+      return response as PaginatedResponse<PropertyCardData>;
+    }
+
+    if (Array.isArray(response)) {
+      return {
+        items: response.map(mapPropertyResponse) as unknown as PropertyCardData[],
+        total: response.length,
+        page: 1,
+        limit: response.length,
+        totalPages: 1,
+      };
     }
     
     return response as PaginatedResponse<PropertyCardData>;
@@ -66,6 +75,6 @@ export const propertyService = {
    */
   async getFeaturedProperties() {
     const data = await api.get<any[]>("/properties/featured");
-    return data.map(mapPropertyResponse) as PropertyCardData[];
+    return data.map(mapPropertyResponse) as unknown as PropertyCardData[];
   },
 };

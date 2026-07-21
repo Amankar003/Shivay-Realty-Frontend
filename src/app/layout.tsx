@@ -4,6 +4,8 @@ import { SITE_CONFIG, METADATA_DEFAULTS } from "@/lib/constants";
 import { Providers } from "./providers";
 import { Navbar, Footer, PageWrapper } from "@/components/layout";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { WhatsAppButton } from "@/components/shared/whatsapp-button";
+import { Chatbot } from "@/components/shared/chatbot";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -77,6 +79,8 @@ export default function RootLayout({
             </main>
           </PageWrapper>
           <Footer />
+          <WhatsAppButton />
+          <Chatbot />
         </Providers>
       </body>
     </html>
