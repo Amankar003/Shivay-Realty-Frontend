@@ -37,13 +37,13 @@ export function Hero() {
   });
 
   return (
-    <section className="relative w-full min-h-[85vh] flex flex-col items-center bg-background overflow-hidden pt-24 pb-20 lg:pb-32">
+    <section className="relative w-full flex flex-col items-center bg-background overflow-hidden pt-24 lg:pt-28 pb-16 lg:pb-24">
       
       {/* Background - Deep Onyx */}
       <div className="absolute inset-0 z-0 bg-background pointer-events-none" />
       
-      <div className="container-luxury relative z-20 mx-auto w-full flex-1 flex flex-col justify-center">
-        <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 gap-16 lg:gap-8 items-center">
+      <div className="container-luxury relative z-20 mx-auto w-full flex flex-col">
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 gap-12 lg:gap-8 items-center lg:items-start">
           
           {/* Left Column (55%) */}
           <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-start text-left z-30 w-full">
@@ -167,7 +167,7 @@ export function Hero() {
           </div>
 
           {/* Right Column (45%) */}
-          <div className="lg:col-span-6 xl:col-span-6 relative w-full h-[400px] lg:h-[650px] flex items-center justify-center mt-10 lg:mt-0">
+          <div className="lg:col-span-6 xl:col-span-6 relative w-full h-[400px] lg:h-[650px] flex items-center justify-center mt-8 lg:mt-0">
             
             {/* Layer 2: Radial Circular Gradient */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

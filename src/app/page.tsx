@@ -38,6 +38,14 @@ const Testimonials = dynamic(
   { ssr: false }
 );
 
+const FAQSection = dynamic(
+  () =>
+    import("@/components/sections/faq-section").then((m) => ({
+      default: m.FAQSection,
+    })),
+  { ssr: false }
+);
+
 function SectionFallback() {
   return (
     <div className="container-luxury py-16">
@@ -64,6 +72,9 @@ export default function HomePage() {
       </Suspense>
       <Suspense fallback={<SectionFallback />}>
         <Testimonials />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <FAQSection />
       </Suspense>
       <CTASection />
     </div>

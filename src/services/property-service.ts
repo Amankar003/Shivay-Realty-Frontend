@@ -19,17 +19,25 @@ function mapPropertyResponse(item: any): Property {
     floorPlans: item.floor_plans,
     nearbyPlaces: item.nearby_places,
     isFeatured: item.is_featured,
+    isTrending: item.is_trending,
     isPublished: item.is_published,
     createdAt: item.created_at,
     updatedAt: item.updated_at,
   };
 }
 
+export interface SearchSuggestion {
+  label: string;
+  type: string;
+}
+
 export const propertyService = {
   /**
-   * Get paginated list of properties with filters
+   * Get paginated list of properties with server-side filters
    */
-  async getProperties(filters?: PropertyFilters): Promise<PaginatedResponse<PropertyCardData>> {
+  async getProperties(
+    filters?: PropertyFilters
+  ): Promise<PaginatedResponse<PropertyCardData>> {
     const response = await api.get<any>("/properties", {
       search: filters?.search,
       city: filters?.city,
@@ -42,8 +50,8 @@ export const propertyService = {
       page: filters?.page,
       limit: filters?.limit,
     });
-    
-    // Map items if response is paginated (it's a dict with items)
+
+    // Map items if response is paginated
     if (response && Array.isArray(response.items)) {
       response.items = response.items.map(mapPropertyResponse);
       return response as PaginatedResponse<PropertyCardData>;
@@ -51,15 +59,31 @@ export const propertyService = {
 
     if (Array.isArray(response)) {
       return {
-        items: response.map(mapPropertyResponse) as unknown as PropertyCardData[],
+        items: response.map(
+          mapPropertyResponse
+        ) as unknown as PropertyCardData[],
         total: response.length,
         page: 1,
         limit: response.length,
         totalPages: 1,
       };
     }
-    
+
     return response as PaginatedResponse<PropertyCardData>;
+  },
+
+  /**
+   * Get structured search suggestions for autocomplete
+   */
+  async getSuggestions(query: string): Promise<SearchSuggestion[]> {
+    if (!query || query.trim().length < 1) return [];
+    try {
+      return await api.get<SearchSuggestion[]>("/properties/suggestions", {
+        q: query.trim(),
+      });
+    } catch {
+      return [];
+    }
   },
 
   /**

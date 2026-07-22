@@ -147,7 +147,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-2 group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-accent-gold px-8 py-4 font-accent text-sm font-medium tracking-wider text-background uppercase transition-transform hover:scale-[1.02] active:scale-95 shadow-gold w-full disabled:opacity-70 disabled:hover:scale-100"
+            className="mt-2 group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-black px-8 py-4 font-accent text-sm font-medium tracking-wider text-white uppercase transition-transform hover:scale-[1.02] active:scale-95 shadow-xl w-full disabled:opacity-70 disabled:hover:scale-100"
           >
             <span className="relative z-10 flex items-center gap-2">
               {isSubmitting ? "Sending Message..." : "Send Message"}

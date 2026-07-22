@@ -86,8 +86,8 @@ async function request<T>(
  * API methods
  */
 export const api = {
-  get<T>(endpoint: string, params?: Record<string, string | number | boolean | undefined>) {
-    return request<T>(endpoint, { method: "GET", params });
+  get<T>(endpoint: string, params?: Record<string, string | number | boolean | undefined>, customOptions?: RequestInit) {
+    return request<T>(endpoint, { method: "GET", params, ...customOptions });
   },
 
   post<T>(endpoint: string, body?: unknown) {

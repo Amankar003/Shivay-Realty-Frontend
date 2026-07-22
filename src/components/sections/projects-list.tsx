@@ -1,64 +1,76 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { PropertyCard, PropertyFilters } from "@/components/property";
 import { SectionHeader, ScrollReveal } from "@/components/shared";
 import { propertyService } from "@/services/property-service";
 import type { PropertyType, PropertyStatus, PropertyCardData } from "@/types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function ProjectsList() {
   const [properties, setProperties] = useState<PropertyCardData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 12;
+
   const [filters, setFilters] = useState({
     type: "all" as PropertyType | "all",
     status: "all" as PropertyStatus | "all",
     city: "all",
     search: "",
+    sortBy: "newest",
   });
 
+  const [availableCities, setAvailableCities] = useState<string[]>([]);
+
+  // Fetch cities once (for dropdown)
   useEffect(() => {
-    const fetchProperties = async () => {
+    const fetchCities = async () => {
       try {
-        const data = await propertyService.getProperties();
-        setProperties(data.items);
+        const data = await propertyService.getProperties({ limit: 100 });
+        const uniqueCities = new Set(data.items.map(p => p.city));
+        setAvailableCities(Array.from(uniqueCities).sort());
       } catch (error) {
-        console.error("Failed to load properties", error);
-      } finally {
-        setIsLoading(false);
+        console.error("Failed to load cities", error);
       }
     };
-    fetchProperties();
+    fetchCities();
   }, []);
 
-  // Extract unique cities
-  const cities = useMemo(() => {
-    const uniqueCities = new Set(properties.map(p => p.city));
-    return Array.from(uniqueCities).sort();
-  }, [properties]);
+  const fetchProperties = useCallback(async (currentFilters: typeof filters, currentPage: number) => {
+    setIsLoading(true);
+    try {
+      const data = await propertyService.getProperties({
+        search: currentFilters.search,
+        city: currentFilters.city === "all" ? undefined : currentFilters.city,
+        propertyType: currentFilters.type === "all" ? undefined : (currentFilters.type as any),
+        status: currentFilters.status === "all" ? undefined : (currentFilters.status as any),
+        sortBy: currentFilters.sortBy as "newest" | "price-asc" | "price-desc" | "name-asc" | undefined,
+        page: currentPage,
+        limit,
+      });
+      setProperties(data.items);
+      setTotal(data.total);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.error("Failed to load properties", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
-  // Filter properties
-  const filteredProperties = useMemo(() => {
-    return properties.filter((property) => {
-      // Search filter
-      const searchLower = filters.search.toLowerCase();
-      const matchesSearch = !filters.search || 
-        property.title.toLowerCase().includes(searchLower) || 
-        property.location.toLowerCase().includes(searchLower) ||
-        property.city.toLowerCase().includes(searchLower);
+  // Effect to refetch when filters or page change
+  useEffect(() => {
+    fetchProperties(filters, page);
+  }, [filters, page, fetchProperties]);
 
-      // Type filter
-      const matchesType = filters.type === "all" || property.propertyType === filters.type;
-      
-      // Status filter
-      const matchesStatus = filters.status === "all" || property.status === filters.status;
-      
-      // City filter
-      const matchesCity = filters.city === "all" || property.city === filters.city;
-
-      return matchesSearch && matchesType && matchesStatus && matchesCity;
-    });
-  }, [filters, properties]);
+  const handleFilterChange = (newFilters: any) => {
+    setFilters(newFilters);
+    setPage(1); // Reset to first page on filter change
+  };
 
   return (
     <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 min-h-screen bg-background">
@@ -72,21 +84,36 @@ export function ProjectsList() {
           />
         </div>
 
-        <PropertyFilters onFilterChange={setFilters} cities={cities} />
+        <PropertyFilters onFilterChange={handleFilterChange} cities={availableCities} isLoading={isLoading} />
 
         {/* Results Count */}
-        <div className="mb-6 font-accent text-sm text-foreground-secondary">
-          Showing {filteredProperties.length} {filteredProperties.length === 1 ? 'property' : 'properties'}
+        <div className="mb-6 font-accent text-sm text-foreground-secondary flex justify-between items-center">
+          <span>
+            {isLoading ? (
+              "Loading..."
+            ) : (
+              <>Showing {properties.length > 0 ? (page - 1) * limit + 1 : 0}-{Math.min(page * limit, total)} of {total} {total === 1 ? 'property' : 'properties'}</>
+            )}
+          </span>
         </div>
 
         {/* Grid */}
         {isLoading ? (
-          <div className="flex items-center justify-center py-32">
-            <div className="w-10 h-10 border-4 border-accent-gold border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : filteredProperties.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProperties.map((property, index) => (
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="animate-pulse bg-background-secondary rounded-3xl h-[450px] border border-border/50 overflow-hidden">
+                <div className="h-2/3 bg-background-secondary/80" />
+                <div className="p-6 space-y-4">
+                  <div className="h-6 bg-background-secondary/80 rounded-md w-3/4" />
+                  <div className="h-4 bg-background-secondary/80 rounded-md w-1/2" />
+                  <div className="h-8 bg-background-secondary/80 rounded-md w-1/3" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : properties.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {properties.map((property, index) => (
               <ScrollReveal
                 key={property.id}
                 direction="up"
@@ -102,10 +129,51 @@ export function ProjectsList() {
             <h3 className="text-xl font-display text-foreground mb-2">No properties found</h3>
             <p className="text-foreground-secondary mb-6">Try adjusting your filters to find what you're looking for.</p>
             <button
-              onClick={() => setFilters({ type: "all", status: "all", city: "all", search: "" })}
+              onClick={() => handleFilterChange({ type: "all", status: "all", city: "all", search: "", sortBy: "newest" })}
               className="px-6 py-2.5 bg-accent-gold/10 text-accent-gold border border-accent-gold/20 font-accent text-sm tracking-wide uppercase rounded-md hover:bg-accent-gold hover:text-background transition-colors"
             >
               Clear All Filters
+            </button>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {!isLoading && totalPages > 1 && (
+          <div className="mt-16 flex items-center justify-center gap-2">
+            <button
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="p-2 rounded-full border border-border bg-background hover:bg-background-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5 text-foreground" />
+            </button>
+            
+            <div className="flex gap-1 mx-4">
+              {[...Array(totalPages)].map((_, i) => {
+                const p = i + 1;
+                const isCurrent = p === page;
+                return (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
+                      isCurrent 
+                        ? "bg-accent-gold text-background" 
+                        : "text-foreground-secondary hover:bg-background-secondary hover:text-foreground"
+                    }`}
+                  >
+                    {p}
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className="p-2 rounded-full border border-border bg-background hover:bg-background-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronRight className="w-5 h-5 text-foreground" />
             </button>
           </div>
         )}

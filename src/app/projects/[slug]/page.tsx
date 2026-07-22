@@ -17,13 +17,24 @@ export async function generateMetadata(
     };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://shivaayrealty.com";
+  const propertyUrl = `${baseUrl}/projects/${property.slug}`;
+  const imageUrl = property.images && property.images.length > 0 
+    ? (property.images[0].url.startsWith('http') ? property.images[0].url : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${property.images[0].url}`)
+    : "";
+
   return {
     title: `${property.title} | Luxury ${property.propertyType} in ${property.city}`,
     description: property.description.substring(0, 160),
+    alternates: {
+      canonical: propertyUrl,
+    },
     openGraph: {
       title: `${property.title} by ${SITE_CONFIG.name}`,
       description: property.description.substring(0, 160),
-      images: property.images && property.images.length > 0 ? [{ url: property.images[0].url }] : [],
+      url: propertyUrl,
+      type: "website",
+      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630, alt: property.title }] : [],
     },
   };
 }
@@ -36,8 +47,38 @@ export default async function PropertyDetailsPage(props: { params: Promise<{ slu
     notFound();
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://shivaayrealty.com";
+  const propertyUrl = `${baseUrl}/projects/${property.slug}`;
+  const imageUrl = property.images && property.images.length > 0 
+    ? (property.images[0].url.startsWith('http') ? property.images[0].url : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${property.images[0].url}`)
+    : "";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": property.title,
+    "description": property.description,
+    "url": propertyUrl,
+    "image": imageUrl || undefined,
+    "offers": {
+      "@type": "Offer",
+      "price": property.price,
+      "priceCurrency": "INR", // Adjust if needed
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": property.city,
+      "addressRegion": property.state,
+      "streetAddress": property.address,
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <PropertyHero property={property} />
       
       <section className="py-20 bg-background relative border-t border-border/50">
