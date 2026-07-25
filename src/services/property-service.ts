@@ -57,8 +57,6 @@ export const propertyService = {
       limit: filters?.limit,
     });
 
-    console.log("DEBUG /properties response:", response);
-
     const rawItems = response?.items || response?.data?.items || (Array.isArray(response) ? response : []);
     const mappedItems = Array.isArray(rawItems) ? rawItems.map(mapPropertyResponse) : [];
 
