@@ -28,9 +28,12 @@ export function PropertyAmenities({ property }: PropertyAmenitiesProps) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {property.highlights.map((highlight, index) => (
-              <GlassCard key={index} className="p-4 border-border/50 flex items-start gap-3 bg-background/50">
-                <Sparkles className="h-5 w-5 text-accent-gold shrink-0 mt-0.5" />
-                <span className="text-foreground-secondary">{highlight}</span>
+              <GlassCard key={index} className="p-4 border-border/50 flex flex-col gap-2 bg-background/50">
+                <div className="flex items-start gap-3">
+                  <Sparkles className="h-5 w-5 text-accent-gold shrink-0 mt-0.5" />
+                  <span className="text-foreground font-medium">{highlight.title}</span>
+                </div>
+                <p className="text-foreground-secondary text-sm pl-8">{highlight.description}</p>
               </GlassCard>
             ))}
           </div>

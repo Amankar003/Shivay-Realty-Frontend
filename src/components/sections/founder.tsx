@@ -54,7 +54,21 @@ export function Founder() {
     );
   }
 
-  if (!founder) return null;
+  if (!founder) {
+    return (
+      <section className="relative py-24 md:py-32 overflow-hidden bg-background border-y border-border/50">
+        <div className="container-luxury flex flex-col items-center justify-center min-h-[40vh] text-center">
+          <div className="w-16 h-16 rounded-full bg-accent-gold/10 text-accent-gold flex items-center justify-center mb-6">
+            <Quote className="w-8 h-8" />
+          </div>
+          <h2 className="font-display text-3xl font-medium text-foreground mb-4">Leadership Profile</h2>
+          <p className="text-foreground-secondary max-w-lg mx-auto">
+            Founder profile is currently being updated. Please check back later to learn more about our leadership team.
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-background">
@@ -79,11 +93,6 @@ export function Founder() {
                 if (!rawUrl || rawUrl.trim() === '') {
                   return (
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-foreground-muted bg-background-tertiary">
-                      <img 
-                        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" 
-                        alt="Placeholder" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-50 grayscale" 
-                      />
                       <span className="relative z-10 overline text-accent-gold mt-4 bg-background/80 px-4 py-1 rounded-full backdrop-blur-sm">Photo Unavailable</span>
                     </div>
                   );
@@ -96,8 +105,7 @@ export function Founder() {
                     className="absolute inset-0 w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback if image fails to load
-                      e.currentTarget.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop";
-                      e.currentTarget.classList.add("opacity-50", "grayscale");
+                      e.currentTarget.style.display = 'none';
                     }}
                   />
                 );

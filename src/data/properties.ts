@@ -171,11 +171,11 @@ export function getPropertyBySlug(slug: string): Property | null {
       "24/7 Premium Security"
     ],
     highlights: [
-      "Italian Marble Flooring",
-      "Smart Home Automation",
-      "Private Elevators",
-      "Panoramic City/Sea Views",
-      "IGBC Platinum Rated"
+      { title: "Italian Marble Flooring", description: "Premium imported marble across all living areas" },
+      { title: "Smart Home Automation", description: "Fully integrated smart home controls" },
+      { title: "Private Elevators", description: "Direct private access to your residence" },
+      { title: "Panoramic City/Sea Views", description: "Uninterrupted sweeping views" },
+      { title: "IGBC Platinum Rated", description: "Highest standard of sustainable design" }
     ],
     floorPlans: [
       {

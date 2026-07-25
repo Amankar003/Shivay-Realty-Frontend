@@ -46,6 +46,14 @@ const FAQSection = dynamic(
   { ssr: false }
 );
 
+const KnowledgeHub = dynamic(
+  () =>
+    import("@/components/sections/knowledge-hub").then((m) => ({
+      default: m.KnowledgeHub,
+    })),
+  { ssr: false }
+);
+
 function SectionFallback() {
   return (
     <div className="container-luxury py-16">
@@ -75,6 +83,9 @@ export default function HomePage() {
       </Suspense>
       <Suspense fallback={<SectionFallback />}>
         <FAQSection />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <KnowledgeHub />
       </Suspense>
       <CTASection />
     </div>

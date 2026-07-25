@@ -9,6 +9,8 @@ interface ProvidersProps {
   children: ReactNode;
 }
 
+import { ThemeProvider } from "next-themes";
+
 export function Providers({ children }: ProvidersProps) {
   const [queryClient] = useState(
     () =>
@@ -25,7 +27,9 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        {children}
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

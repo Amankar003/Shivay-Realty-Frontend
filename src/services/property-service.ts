@@ -23,6 +23,12 @@ function mapPropertyResponse(item: any): Property {
     isPublished: item.is_published,
     createdAt: item.created_at,
     updatedAt: item.updated_at,
+    images: item.images || [],
+    image: item.images && item.images.length > 0 ? {
+      ...item.images[0],
+      altText: item.images[0].alt_text,
+      publicId: item.images[0].public_id
+    } : null,
   };
 }
 

@@ -14,3 +14,4 @@ export { ContactInfo } from "./contact-info";
 export { ContactForm } from "./contact-form";
 export { HowWeWork } from "./how-we-work";
 export { FAQSection } from "./faq-section";
+export { KnowledgeHub } from "./knowledge-hub";

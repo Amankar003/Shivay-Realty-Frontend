@@ -29,6 +29,11 @@ export interface FloorPlan {
   bathrooms: number;
 }
 
+export interface PropertyHighlight {
+  title: string;
+  description: string;
+}
+
 export interface Property {
   id: string;
   title: string;
@@ -49,7 +54,7 @@ export interface Property {
   bathrooms: number;
   areaSqft: number;
   amenities: string[];
-  highlights: string[];
+  highlights: PropertyHighlight[];
   floorPlans: FloorPlan[];
   nearbyPlaces: NearbyPlace[];
   images: PropertyImage[];

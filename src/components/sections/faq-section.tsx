@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { SectionHeader, ScrollReveal } from "@/components/shared";
+import { cn } from "@/lib/utils";
 import { api } from "@/lib/api";
 
 interface FAQ {
@@ -71,28 +72,38 @@ export function FAQSection() {
                 duration={0.5}
               >
                 <div 
-                  className={`border border-border/60 rounded-2xl overflow-hidden transition-all duration-300 ${
+                  className={cn(
+                    "border border-border/60 rounded-2xl overflow-hidden transition-all duration-300",
                     openId === faq.id 
-                      ? 'bg-background-secondary/80 border-accent-gold/30 shadow-[0_4px_20px_-10px_rgba(212,175,55,0.1)]' 
-                      : 'bg-background hover:bg-background-secondary/40 hover:border-border'
-                  }`}
+                      ? "bg-background-secondary/80 border-accent-gold/30 shadow-[0_4px_20px_-10px_rgba(212,175,55,0.1)]" 
+                      : "bg-background hover:bg-background-secondary/40 hover:border-border"
+                  )}
                 >
                   <button
                     onClick={() => toggleAccordion(faq.id)}
                     className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                   >
                     <div className="flex items-center gap-4">
-                      <span className={`flex-shrink-0 transition-colors ${openId === faq.id ? 'text-accent-gold' : 'text-foreground-muted'}`}>
+                      <span className={cn(
+                        "flex-shrink-0 transition-colors",
+                        openId === faq.id ? "text-accent-gold" : "text-foreground-muted"
+                      )}>
                         <HelpCircle className="w-5 h-5" />
                       </span>
-                      <span className={`font-display text-lg sm:text-xl transition-colors ${openId === faq.id ? 'text-accent-gold' : 'text-foreground'}`}>
+                      <span className={cn(
+                        "font-display text-lg sm:text-xl transition-colors",
+                        openId === faq.id ? "text-accent-gold" : "text-foreground"
+                      )}>
                         {faq.question}
                       </span>
                     </div>
                     <motion.div
                       animate={{ rotate: openId === faq.id ? 180 : 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className={`flex-shrink-0 ml-4 p-1 rounded-full ${openId === faq.id ? 'bg-accent-gold/10 text-accent-gold' : 'text-foreground-muted'}`}
+                      className={cn(
+                        "flex-shrink-0 ml-4 p-1 rounded-full",
+                        openId === faq.id ? "bg-accent-gold/10 text-accent-gold" : "text-foreground-muted"
+                      )}
                     >
                       <ChevronDown className="w-5 h-5" />
                     </motion.div>
