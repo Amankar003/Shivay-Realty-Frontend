@@ -26,6 +26,26 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "shivay-realty-backend-1.onrender.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.onrender.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.in",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "img.youtube.com",
         pathname: "/**",
       },

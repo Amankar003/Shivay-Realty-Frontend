@@ -57,25 +57,18 @@ export const propertyService = {
       limit: filters?.limit,
     });
 
-    // Map items if response is paginated
-    if (response && Array.isArray(response.items)) {
-      response.items = response.items.map(mapPropertyResponse);
-      return response as PaginatedResponse<PropertyCardData>;
-    }
+    console.log("DEBUG /properties response:", response);
 
-    if (Array.isArray(response)) {
-      return {
-        items: response.map(
-          mapPropertyResponse
-        ) as unknown as PropertyCardData[],
-        total: response.length,
-        page: 1,
-        limit: response.length,
-        totalPages: 1,
-      };
-    }
+    const rawItems = response?.items || response?.data?.items || (Array.isArray(response) ? response : []);
+    const mappedItems = Array.isArray(rawItems) ? rawItems.map(mapPropertyResponse) : [];
 
-    return response as PaginatedResponse<PropertyCardData>;
+    return {
+      items: mappedItems as unknown as PropertyCardData[],
+      total: response?.total || mappedItems.length,
+      page: response?.page || 1,
+      limit: response?.limit || filters?.limit || 12,
+      totalPages: response?.totalPages || 1,
+    };
   },
 
   /**
@@ -104,7 +97,8 @@ export const propertyService = {
    * Get featured properties for homepage
    */
   async getFeaturedProperties() {
-    const data = await api.get<any[]>("/properties/featured");
-    return data.map(mapPropertyResponse) as unknown as PropertyCardData[];
+    const response = await api.get<any>("/properties/featured");
+    const rawItems = response?.items || response?.data?.items || (Array.isArray(response) ? response : []);
+    return (Array.isArray(rawItems) ? rawItems.map(mapPropertyResponse) : []) as unknown as PropertyCardData[];
   },
 };

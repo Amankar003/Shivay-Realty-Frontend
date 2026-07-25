@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   description:
     "Shivaay Realty specializes in premium residential rental solutions in Ranchi. We provide carefully selected apartments, guest houses, luxury residences, and family homes located in prime neighborhoods.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://shivaayrealty.com",
-  apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1",
+  apiUrl: process.env.NEXT_PUBLIC_API_URL || "https://shivay-realty-backend-1.onrender.com/api/v1",
   email: "info@shivaayrealty.com",
   phone: "+91 6206825676",
   alternatePhone: "",
