@@ -61,6 +61,7 @@ async function request<T>(
   };
 
   const response = await fetch(url, {
+    cache: "no-store",
     ...fetchOptions,
     headers: {
       ...defaultHeaders,

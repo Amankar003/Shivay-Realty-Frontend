@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "shivay-realty-backend-1.onrender.com",
+        hostname: "shivay-realty-backend-2.onrender.com",
         pathname: "/**",
       },
       {

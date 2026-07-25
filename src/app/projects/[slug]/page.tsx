@@ -4,6 +4,9 @@ import { propertyService } from "@/services/property-service";
 import { PropertyHero, PropertyAmenities, InquiryForm } from "@/components/property";
 import { SITE_CONFIG } from "@/data/navigation";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 // Generate dynamic metadata for SEO
 export async function generateMetadata(
   props: { params: Promise<{ slug: string }> }
@@ -18,7 +21,7 @@ export async function generateMetadata(
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://shivaayrealty.com";
-  const apiBaseHost = (process.env.NEXT_PUBLIC_API_URL || 'https://shivay-realty-backend-1.onrender.com').split('/api/v1')[0];
+  const apiBaseHost = (process.env.NEXT_PUBLIC_API_URL || 'https://shivay-realty-backend-2.onrender.com').split('/api/v1')[0];
   const propertyUrl = `${baseUrl}/projects/${property.slug}`;
   const imageUrl = property.images && property.images.length > 0 
     ? (property.images[0].url.startsWith('http') ? property.images[0].url : `${apiBaseHost}${property.images[0].url.startsWith('/') ? '' : '/'}${property.images[0].url}`)
@@ -49,7 +52,7 @@ export default async function PropertyDetailsPage(props: { params: Promise<{ slu
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://shivaayrealty.com";
-  const apiBaseHost = (process.env.NEXT_PUBLIC_API_URL || 'https://shivay-realty-backend-1.onrender.com').split('/api/v1')[0];
+  const apiBaseHost = (process.env.NEXT_PUBLIC_API_URL || 'https://shivay-realty-backend-2.onrender.com').split('/api/v1')[0];
   const propertyUrl = `${baseUrl}/projects/${property.slug}`;
   const imageUrl = property.images && property.images.length > 0 
     ? (property.images[0].url.startsWith('http') ? property.images[0].url : `${apiBaseHost}${property.images[0].url.startsWith('/') ? '' : '/'}${property.images[0].url}`)
