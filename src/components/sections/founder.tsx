@@ -2,72 +2,13 @@
 
 import Image from "next/image";
 import { Quote } from "lucide-react";
-import { useState, useEffect } from "react";
 import { ScrollReveal } from "@/components/shared";
 import { SITE_CONFIG } from "@/data/navigation";
-import { api } from "@/lib/api";
-
-interface TeamMember {
-  id: string;
-  name: string;
-  designation: string;
-  bio: string;
-  photo_url?: string;
-  linkedin?: string;
-  instagram?: string;
-}
+import { founderData as founder } from "@/data/founder";
 
 export function Founder() {
-  const [founder, setFounder] = useState<TeamMember | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchFounder = async () => {
-      try {
-        const data = await api.get<TeamMember[]>("/team?founders_only=true", undefined, { signal: controller.signal });
-        if (data && data.length > 0) {
-          setFounder(data[0]);
-        }
-      } catch (error: any) {
-        if (error.name !== 'AbortError' && error.message !== 'The user aborted a request.') {
-          console.error("Failed to load founder", error);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchFounder();
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
-
-  if (isLoading) {
-    return (
-      <section className="relative py-24 md:py-32 overflow-hidden bg-background">
-        <div className="container-luxury flex justify-center">
-          <div className="animate-pulse w-full max-w-4xl h-96 bg-background-secondary rounded-xl" />
-        </div>
-      </section>
-    );
-  }
-
   if (!founder) {
-    return (
-      <section className="relative py-24 md:py-32 overflow-hidden bg-background border-y border-border/50">
-        <div className="container-luxury flex flex-col items-center justify-center min-h-[40vh] text-center">
-          <div className="w-16 h-16 rounded-full bg-accent-gold/10 text-accent-gold flex items-center justify-center mb-6">
-            <Quote className="w-8 h-8" />
-          </div>
-          <h2 className="font-display text-3xl font-medium text-foreground mb-4">Leadership Profile</h2>
-          <p className="text-foreground-secondary max-w-lg mx-auto">
-            Founder profile is currently being updated. Please check back later to learn more about our leadership team.
-          </p>
-        </div>
-      </section>
-    );
+    return null;
   }
 
   return (
@@ -79,37 +20,20 @@ export function Founder() {
           <ScrollReveal direction="right" duration={0.8} className="relative aspect-[3/4] w-full max-w-md mx-auto lg:mx-0">
             <div className="absolute inset-0 bg-accent-gold/10 translate-x-4 translate-y-4 rounded-xl -z-10" />
             <div className="relative w-full h-full rounded-xl overflow-hidden border border-border/50 shadow-xl bg-background-secondary flex items-center justify-center">
-              {(() => {
-                const rawUrl = founder.photo_url || "";
-                // Normalize slashes
-                const normalizedUrl = rawUrl.replace(/\\/g, '/');
-                // Ensure starts with slash if relative
-                const cleanPath = normalizedUrl.startsWith('http') || normalizedUrl.startsWith('/') ? normalizedUrl : `/${normalizedUrl}`;
-                
-                const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000').split('/api/v1')[0];
-                const imgSrc = normalizedUrl.startsWith('http') ? normalizedUrl : `${baseUrl}${cleanPath}`;
-                
-                // If there's no valid URL, show placeholder
-                if (!rawUrl || rawUrl.trim() === '') {
-                  return (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-foreground-muted bg-background-tertiary">
-                      <span className="relative z-10 overline text-accent-gold mt-4 bg-background/80 px-4 py-1 rounded-full backdrop-blur-sm">Photo Unavailable</span>
-                    </div>
-                  );
-                }
-
-                return (
-                  <img
-                    src={imgSrc}
-                    alt={founder.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    onError={(e) => {
-                      // Fallback if image fails to load
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
-                );
-              })()}
+              {founder.photo_url ? (
+                <Image
+                  src={founder.photo_url}
+                  alt={founder.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-foreground-muted bg-background-tertiary">
+                  <span className="relative z-10 overline text-accent-gold mt-4 bg-background/80 px-4 py-1 rounded-full backdrop-blur-sm">Photo Unavailable</span>
+                </div>
+              )}
             </div>
             
             <div className="absolute -bottom-8 -right-8 glass-heavy p-6 rounded-xl border border-accent-gold/20 shadow-gold max-w-[240px]">

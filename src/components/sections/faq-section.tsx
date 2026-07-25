@@ -1,44 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { SectionHeader, ScrollReveal } from "@/components/shared";
 import { cn } from "@/lib/utils";
-import { api } from "@/lib/api";
-
-interface FAQ {
-  id: string;
-  question: string;
-  answer: string;
-  category: string;
-}
+import { faqs } from "@/data/faqs";
 
 export function FAQSection() {
-  const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [openId, setOpenId] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchFaqs = async () => {
-      try {
-        const data = await api.get<FAQ[]>("/faqs", undefined, { signal: controller.signal });
-        setFaqs(data);
-      } catch (error: any) {
-        if (error.name !== 'AbortError' && error.message !== 'The user aborted a request.') {
-          console.error("Failed to load FAQs", error);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchFaqs();
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
 
   const toggleAccordion = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -56,15 +26,8 @@ export function FAQSection() {
           />
         </div>
 
-        {isLoading ? (
-          <div className="max-w-3xl mx-auto space-y-4">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="animate-pulse bg-background-secondary rounded-xl h-16 border border-border/50" />
-            ))}
-          </div>
-        ) : (
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
               <ScrollReveal
                 key={faq.id}
                 direction="up"
@@ -133,8 +96,7 @@ export function FAQSection() {
                 </div>
               </ScrollReveal>
             ))}
-          </div>
-        )}
+        </div>
       </div>
 
       {/* Decorative gradients */}
