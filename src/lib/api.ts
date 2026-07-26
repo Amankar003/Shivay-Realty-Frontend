@@ -56,6 +56,9 @@ async function request<T>(
   const { params, ...fetchOptions } = options;
   const url = buildUrl(endpoint, params);
 
+  console.log("[RUNTIME INSTRUMENTATION] API BASE =", API_BASE);
+  console.log("[RUNTIME INSTRUMENTATION] Fetching URL =", url);
+
   const defaultHeaders: HeadersInit = {
     "Content-Type": "application/json",
   };

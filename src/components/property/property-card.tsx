@@ -13,6 +13,7 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({ property, className, priority = false }: PropertyCardProps) {
+  console.log("[RUNTIME INSTRUMENTATION] Rendering property =", property.title);
   const statusColors = {
     upcoming: "bg-blue-900/50 text-blue-200 border-blue-500/30",
     "under-construction": "bg-amber-900/50 text-amber-200 border-amber-500/30",

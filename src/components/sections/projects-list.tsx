@@ -40,8 +40,11 @@ export function ProjectsList() {
     fetchCities();
   }, []);
 
+  const [error, setError] = useState<string | null>(null);
+
   const fetchProperties = useCallback(async (currentFilters: typeof filters, currentPage: number) => {
     setIsLoading(true);
+    setError(null);
     try {
       const data = await propertyService.getProperties({
         search: currentFilters.search,
@@ -55,8 +58,9 @@ export function ProjectsList() {
       setProperties(data.items);
       setTotal(data.total);
       setTotalPages(data.totalPages);
-    } catch (error) {
-      console.error("Failed to load properties", error);
+    } catch (err: any) {
+      console.error("Failed to load properties:", err);
+      setError(err?.message || "Failed to load properties. Please check your network connection.");
     } finally {
       setIsLoading(false);
     }
@@ -110,6 +114,17 @@ export function ProjectsList() {
                 </div>
               </div>
             ))}
+          </div>
+        ) : error ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center bg-background-secondary/30 rounded-2xl border border-red-500/20">
+            <h3 className="text-xl font-display text-red-400 mb-2">Unable to load properties</h3>
+            <p className="text-foreground-secondary mb-6 max-w-md">{error}</p>
+            <button
+              onClick={() => fetchProperties(filters, page)}
+              className="px-6 py-2.5 bg-accent-gold text-background font-accent text-sm font-semibold tracking-wide uppercase rounded-md hover:bg-accent-gold/90 transition-colors shadow-md"
+            >
+              Retry
+            </button>
           </div>
         ) : properties.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

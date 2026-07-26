@@ -60,6 +60,9 @@ export const propertyService = {
     const rawItems = response?.items || response?.data?.items || (Array.isArray(response) ? response : []);
     const mappedItems = Array.isArray(rawItems) ? rawItems.map(mapPropertyResponse) : [];
 
+    console.log("[RUNTIME INSTRUMENTATION] Raw Response =", response);
+    console.log("[RUNTIME INSTRUMENTATION] Mapped Items count =", mappedItems.length);
+
     return {
       items: mappedItems as unknown as PropertyCardData[],
       total: response?.total || mappedItems.length,
