@@ -70,7 +70,6 @@ async function request<T>(
       ...defaultHeaders,
       ...fetchOptions.headers,
     },
-    credentials: "include",
   });
 
   if (!response.ok) {
